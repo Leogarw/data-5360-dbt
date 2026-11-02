@@ -23,7 +23,7 @@ with db_source as (
         customer_first_name,
         customer_last_name,
         customer_email
-    from {{ ref('stg_customer_service_interactions') }}
+    from {{ ref('oliver_stg_customer_service_interactions') }}
 )
 
 , final as (

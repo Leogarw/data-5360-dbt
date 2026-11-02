@@ -10,7 +10,7 @@ select
     c.call_duration_min,
     c.issue_type,
     c.resolution_status
-from {{ ref('stg_customer_service_interactions') }} c
+from {{ ref('oliver_stg_customer_service_interactions') }} c
 inner join {{ ref('dim_customer') }} cu
     on c.customer_first_name = cu.firstname
     and c.customer_last_name = cu.lastname
