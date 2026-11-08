@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: eco_dim_customer
+    description: "Conformed customer dimension combining the transactional and marketing sources, one row per customer (matched on first and last name)"
+  - name: dim_product
+    description: "Product dimension"
+  - name: dim_promotional_campaign
+    description: "Promotional campaign dimension"
+  - name: dim_email
+    description: "Marketing email dimension"
+  - name: dim_event
+    description: "Email event type dimension"
+  - name: eco_dim_date
+    description: "Date dimension"
+  - name: fact_sales
+    description: "Sales fact at the order line grain"
+  - name: fact_marketing_email
+    description: "Marketing email event fact, one row per email event"
