@@ -3,17 +3,66 @@ version: 2
 models:
   - name: eco_dim_customer
     description: "Conformed customer dimension combining the transactional and marketing sources, one row per customer (matched on first and last name)"
+    columns:
+      - name: customer_key
+        tests:
+          - unique 
+
   - name: dim_product
     description: "Product dimension"
+    columns:
+      - name: product_type
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - "accessory"
+                  - "cutting_board"
+                  - "pan"
+                  - "pot"
+                  - "storage"
+                  - "utensil"
+
   - name: dim_promotional_campaign
     description: "Promotional campaign dimension"
+    columns:
+      - name: campaign_id
+        tests:
+          - not_null
   - name: dim_email
     description: "Marketing email dimension"
+    columns:
+      - name: email_id
+        tests:
+          - not_null 
   - name: dim_event
     description: "Email event type dimension"
+    columns:
+      - name: event_type_key
+        tests:
+          - unique
   - name: eco_dim_date
     description: "Date dimension"
+    columns:
+      - name: date_key
+        tests:
+          - unique
   - name: fact_sales
     description: "Sales fact at the order line grain"
+    columns:
+      - name: date_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('eco_dim_date')
+                field: date_key 
+
   - name: fact_marketing_email
     description: "Marketing email event fact, one row per email event"
+    columns:
+      - name: event_type_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_event')
+                field: event_type_key
